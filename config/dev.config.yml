@@ -1,0 +1,8 @@
+mode: "dev"
+services:
+  database:
+    name: "annotation"
+    host: "localhost"
+    port: "27019"
+    user: ""
+    passwd: ""
