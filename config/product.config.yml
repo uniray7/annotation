@@ -1,4 +1,4 @@
-mode: "dev"
+mode: "product"
 services:
   database:
     name: "annotation"
@@ -6,3 +6,5 @@ services:
     port: "27019"
     user: ""
     password: ""
+  mediaStorage:
+    dir: "/home/uniray7/mediaStorage"

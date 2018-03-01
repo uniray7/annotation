@@ -1,3 +1,10 @@
+const utils = require('./utils/utils.js');
+// check env "ANNOTATION_ROOT" and "ANNOTATION_ENV" are existed
+if (!utils.checkEnv()) {
+  console.log('Please set environment variables "ANNOTATION_ROOT" and "ANNOTATION_ENV"');
+  process.exit(-1);
+}
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -11,27 +18,28 @@ mongoose.Promise = require('bluebird')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+const app = express();
+
 const usersRoute = require('./routes/users');
+const mediaRoute = require('./routes/media');
 
-const utils = require('./utils/utils.js');
-
-const config = utils.getConfig('./config/config.yml');
-const dbConfig = config.services.database;
-
-var app = express();
-const Schema = mongoose.Schema;
+// get config and connect to mongodb
+const config = utils.getConfig();
+const dbCfg = config.services.database;
 
 let dbOption = {}
-if (dbConfig.user) {
-  dbOption.auth = {user: dbConfig.user, password: dbConfig.password};
+if (dbCfg.user) {
+  dbOption.auth = {user: dbCfg.user, password: dbCfg.password};
 }
-
-mongoose.connect('mongodb://'+dbConfig.host+':'+dbConfig.port+'/'+dbConfig.name, dbOption)
+mongoose.connect('mongodb://'+dbCfg.host+':'+dbCfg.port+'/'+dbCfg.name, dbOption)
   .then(() =>  console.log('mongodb connection successful'))
   .catch((err) => {
     console.log(err);
     process.exit(-1);
   });
+
+const Schema = mongoose.Schema;
+
 
 app.use(require('express-session')({
   name: 'jagerAnnotation',
@@ -53,6 +61,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/users', usersRoute);
+app.use('/api/media', mediaRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

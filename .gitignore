@@ -1,0 +1,6 @@
+
+# swp
+.*.swp
+
+# npm
+node_modules

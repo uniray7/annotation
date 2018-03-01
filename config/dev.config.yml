@@ -5,4 +5,6 @@ services:
     host: "localhost"
     port: "27019"
     user: ""
-    passwd: ""
+    password: ""
+  mediaStorage:
+    dir: "/home/uniray7/mediaStorage"
