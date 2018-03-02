@@ -7,7 +7,6 @@ if (!utils.checkEnv()) {
 
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
 const httpLogger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -37,9 +36,6 @@ mongoose.connect('mongodb://'+dbCfg.host+':'+dbCfg.port+'/'+dbCfg.name, dbOption
     console.log(err);
     process.exit(-1);
   });
-
-const Schema = mongoose.Schema;
-
 
 app.use(require('express-session')({
   name: 'jagerAnnotation',
