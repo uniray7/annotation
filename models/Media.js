@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-const  Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 var mediaSchema = new Schema({
   mediaPath: String,
-//TODO:  thumbnailPath: String,
+//TODO: thumbnailPath: String,
+//TODO: ownerId: String,
   report: String,
   originalName: String,
   created: {type: Date, default: Date.now} 

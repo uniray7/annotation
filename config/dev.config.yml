@@ -8,3 +8,5 @@ services:
     password: ""
   mediaStorage:
     dest: "/home/uniray7/mediaStorage"
+  frameStorage:
+    dest: "/home/uniray7/frameStorage"
