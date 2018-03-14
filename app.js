@@ -80,5 +80,8 @@ app.use(function(err, req, res, next) {
   res.json(err);
 });
 
-app.listen(config.services.api.port);
+if (require.main === module) {
+  app.listen(config.services.api.port);
+}
+
 module.exports = app;
