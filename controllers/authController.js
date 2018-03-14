@@ -3,7 +3,7 @@ const passport = require("passport");
 const HttpStatus = require('http-status-codes'); 
 const User = require("../models/User");
 
-var userController = {};
+const userController = {};
 // Post registration
 userController.register = function(req, res) {
   User.register(new User({ username : req.body.username, name: req.body.name }), req.body.password, function(err, user) {

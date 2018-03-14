@@ -2,12 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var mediaSchema = new Schema({
-  mediaPath: String,
+  mediaUri: String,
 //TODO: thumbnailPath: String,
 //TODO: ownerId: String,
+  name: {type: String, required: true},
+  description: String,
   report: String,
-  originalName: String,
-  created: {type: Date, default: Date.now} 
+  createdTime: {type: Date, default: Date.now},
+  frameNum: Number,
+  status: String,
+  refProject: Array
 });
 
 module.exports = mongoose.model('Media', mediaSchema);

@@ -6,6 +6,7 @@ if (!utils.checkEnv()) {
 }
 
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const httpLogger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -21,6 +22,9 @@ const app = express();
 
 const usersRoute = require('./routes/users');
 const mediaRoute = require('./routes/media');
+const frameRoute = require('./routes/frame');
+const storeRoute = require('./routes/store');
+const projRoute = require('./routes/project.js');
 
 // get config and connect to mongodb
 const config = utils.getConfig();
@@ -37,6 +41,7 @@ mongoose.connect('mongodb://'+dbCfg.host+':'+dbCfg.port+'/'+dbCfg.name, dbOption
     process.exit(-1);
   });
 
+app.use(cors());
 app.use(require('express-session')({
   name: 'jagerAnnotation',
   secret: 'keyboard cat',
@@ -58,6 +63,9 @@ app.use(cookieParser());
 
 app.use('/api/users', usersRoute);
 app.use('/api/media', mediaRoute);
+app.use('/api/frames', frameRoute);
+app.use('/api/projects', projRoute);
+app.use('/store', storeRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -72,5 +80,5 @@ app.use(function(err, req, res, next) {
   res.json(err);
 });
 
-app.listen(6000)
+app.listen(6001)
 module.exports = app;
