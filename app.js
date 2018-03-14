@@ -1,7 +1,7 @@
 const utils = require('./utils/utils.js');
 // check env "ANNOTATION_ROOT" and "ANNOTATION_ENV" are existed
 if (!utils.checkEnv()) {
-  console.log('Please set environment variables "ANNOTATION_ROOT" and "ANNOTATION_ENV"');
+  console.log('Please set environment variables "ANNOTATION_ROOT"');
   process.exit(-1);
 }
 
@@ -80,5 +80,5 @@ app.use(function(err, req, res, next) {
   res.json(err);
 });
 
-app.listen(6001)
+app.listen(config.services.api.port);
 module.exports = app;

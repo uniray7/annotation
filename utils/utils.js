@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 function checkEnv() {
-  if (!(process.env.ANNOTATION_ROOT && process.env.ANNOTATION_ENV)) {
+  if (!(process.env.ANNOTATION_ROOT && process.env.NODE_ENV)) {
     return false;
   }
   else {
@@ -12,7 +12,7 @@ function checkEnv() {
 }
 
 function getConfig() {
-  cfgPath = path.join(process.env.ANNOTATION_ROOT, 'config', process.env.ANNOTATION_ENV+'.config.yml')
+  cfgPath = path.join(process.env.ANNOTATION_ROOT, 'config', process.env.NODE_ENV+'.config.yml')
   return yaml.safeLoad(fs.readFileSync(cfgPath, 'utf8'));
 }
 

@@ -1,5 +1,7 @@
 mode: "dev"
 services:
+  api:
+    port: 6001
   database:
     name: "annotation"
     host: "localhost"
