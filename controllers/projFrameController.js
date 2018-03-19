@@ -19,9 +19,8 @@ projFrameHandlers.getFrame = function(req, res, next) {
       if (!projFrameDoc) {
         return res.status(HttpStatus.NO_CONTENT).send();
       }
-
-      res.status(HttpStatus.OK).send(projFrameDoc);
-      return projFrameModel.update({_id: projFrameDoc.id}, {lastGetTime: Date.now()});  
+      return projFrameModel.update({_id: projFrameDoc.id}, {lastGetTime: Date.now()})
+              .then(() => { return res.status(HttpStatus.OK).send(projFrameDoc);});
     })
     .catch((err) => {
       console.log(err);
@@ -86,8 +85,6 @@ projFrameHandlers.postLabels = function(req, res, next) {
         // TODO: logger
         return res.status(HttpStatus.BAD_REQUEST).send();
       }
-      console.log(projFrameId)
-      console.log(labels)
       return projFrameModel.update({_id: projFrameId}, {$set: {status: 'labeled', labels: labels}});
     })
     .then((result) => {

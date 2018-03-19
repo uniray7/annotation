@@ -80,6 +80,14 @@ app.use(function(err, req, res, next) {
   res.json(err);
 });
 
+// this is for testing:
+// After finishing testing, the app need to be closed by http server
+// After closing, the mongoose connection also need to close.
+// Otherwise, the test process will not exit
+app.close = function() {
+  mongoose.connection.close();
+}
+
 if (require.main === module) {
   app.listen(config.services.api.port);
 }

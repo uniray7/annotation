@@ -1,0 +1,14 @@
+mode: "test"
+services:
+  api:
+    port: 6002
+  database:
+    name: "annotation"
+    host: "localhost"
+    port: "27020"
+    user: ""
+    password: ""
+  mediaStorage:
+    dest: "/home/uniray7/testStore/media"
+  frameStorage:
+    dest: "/home/uniray7/testStore/frame"

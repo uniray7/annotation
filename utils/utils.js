@@ -12,6 +12,10 @@ function checkEnv() {
 }
 
 function getConfig() {
+  if (!checkEnv()) {
+    console.log('Please set environment variables "ANNOTATION_ROOT"');
+    process.exit(-1);
+  }
   cfgPath = path.join(process.env.ANNOTATION_ROOT, 'config', process.env.NODE_ENV+'.config.yml')
   return yaml.safeLoad(fs.readFileSync(cfgPath, 'utf8'));
 }
